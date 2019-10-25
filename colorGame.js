@@ -7,8 +7,9 @@ const colors = [
     "rgb(255, 0, 255)"]
 
 const squares = document.querySelectorAll(".square");
-const pickedColor = colors[3];
+const pickedColor = pickColor();
 const colorDisplay = document.getElementById("colorDisplay");
+const messageDisplay = document.querySelector("#message");
 
 colorDisplay.textContent = pickedColor;
 
@@ -24,8 +25,23 @@ squares.forEach((square, i) => {
 
         if (clickedColor === pickedColor) {
             console.log("correct")
+            messageDisplay.textContent = "Correct";
+            changeColors(clickedColor)
         } else {
             console.log("wrong")
+            this.style.background = "#232323";
+            messageDisplay.textContent = "Try Again";
         }
     })
 })
+
+function changeColors(color) {
+    squares.forEach((square, i) => {
+        square.style.backgroundColor = color;
+    })
+}
+
+function pickColor() {
+    const random = Math.floor(Math.random() * colors.length);
+    return colors[random];
+}
